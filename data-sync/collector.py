@@ -195,6 +195,8 @@ def main():
     inbox = json.loads(inbox_path.read_text()) if inbox_path.exists() else None
     today = dt.datetime.now(dt.timezone.utc).date().isoformat()
     output = collect(config, catalog, previous, today, inbox=inbox)
+    output['generatedAt'] = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')
+    output['runner'] = 'github-actions' if os.environ.get('GITHUB_ACTIONS') == 'true' else 'local'
     atomic_write(target, output)
     print(json.dumps({'checkedAt': today, 'leagues': {k: {'status': v['status'], 'dataAsOf': v.get('dataAsOf'),
                      'fixtures': len(v.get('fixtures', []))} for k, v in output['leagues'].items()},
