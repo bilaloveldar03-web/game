@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "season": "2026-27",
+  "maxBytes": 4000000,
+  "leagues": [
+    {
+      "id": "EPL",
+      "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.1.json"
+    },
+    {
+      "id": "ENG2",
+      "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.2.json"
+    },
+    {
+      "id": "BUND",
+      "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/de.1.json"
+    },
+    {
+      "id": "LALIGA",
+      "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/es.1.json"
+    },
+    {
+      "id": "L1",
+      "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/fr.1.json"
+    },
+    {
+      "id": "SERIEA",
+      "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/it.1.json"
+    },
+    {
+      "id": "ERED",
+      "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/nl.1.json"
+    },
+    {
+      "id": "POR",
+      "url": "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/pt.1.json"
+    }
+  ],
+  "aliases": {
+    "FC Bayern München": "Bayern Munich",
+    "1. FC Köln": "FC Koln",
+    "1. FC Union Berlin": "Union Berlin",
+    "1. FSV Mainz 05": "Mainz 05",
+    "Bayer 04 Leverkusen": "Bayer Leverkusen",
+    "SC Paderborn 07": "Paderborn",
+    "SV 07 Elversberg": "SV Elversberg",
+    "TSG 1899 Hoffenheim": "Hoffenheim",
+    "Club Atlético de Madrid": "Atletico Madrid",
+    "CA Osasuna": "Osasuna",
+    "Deportivo Alavés": "Alaves",
+    "RC Celta de Vigo": "Celta Vigo",
+    "RC Deportivo La Coruña": "Deportivo La Coruna",
+    "RCD Espanyol de Barcelona": "Espanyol",
+    "Rayo Vallecano de Madrid": "Rayo Vallecano",
+    "Real Betis Balompié": "Real Betis",
+    "Real Racing Club de Santander": "Racing Santander",
+    "Real Sociedad de Fútbol": "Real Sociedad",
+    "AJ Auxerre": "Auxerre",
+    "AS Monaco FC": "Monaco",
+    "Angers SCO": "Angers",
+    "ES Troyes AC": "Troyes",
+    "Lille OSC": "Lille",
+    "OGC Nice": "Nice",
+    "Olympique Lyonnais": "Lyon",
+    "Olympique de Marseille": "Marseille",
+    "Paris Saint-Germain FC": "PSG",
+    "RC Strasbourg Alsace": "Strasbourg",
+    "Racing Club de Lens": "Lens",
+    "Stade Brestois 29": "Brest",
+    "Stade Rennais FC 1901": "Rennes",
+    "ACF Fiorentina": "Fiorentina",
+    "AS Roma": "Roma",
+    "Atalanta BC": "Atalanta",
+    "Bologna FC 1909": "Bologna",
+    "Cagliari Calcio": "Cagliari",
+    "Como 1907": "Como",
+    "FC Internazionale Milano": "Inter",
+    "Frosinone Calcio": "Frosinone",
+    "Genoa CFC": "Genoa",
+    "Parma Calcio 1913": "Parma",
+    "SS Lazio": "Lazio",
+    "SSC Napoli": "Napoli",
+    "US Lecce": "Lecce",
+    "US Sassuolo Calcio": "Sassuolo",
+    "Udinese Calcio": "Udinese",
+    "AZ": "AZ Alkmaar",
+    "FC Twente '65": "FC Twente",
+    "Feyenoord Rotterdam": "Feyenoord",
+    "NEC": "NEC Nijmegen",
+    "SBV Excelsior": "Excelsior",
+    "SC Cambuur-Leeuwarden": "SC Cambuur",
+    "Telstar 1963": "Telstar",
+    "Willem II Tilburg": "Willem II",
+    "CD Nacional": "Nacional",
+    "CD Santa Clara": "Santa Clara",
+    "CF Estrela da Amadora": "Estrela Amadora",
+    "CS Marítimo": "Marítimo",
+    "FC Famalicão": "Famalicao",
+    "GD Estoril Praia": "Estoril",
+    "Sport Lisboa e Benfica": "Benfica",
+    "Sporting Clube de Braga": "Braga",
+    "Sporting Clube de Portugal": "Sporting CP",
+    "Vitória Guimarães": "Vitoria Guimaraes"
+  },
+  "marketInbox": "data-sync/inbox/market.json"
+}
