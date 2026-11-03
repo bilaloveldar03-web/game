@@ -1,0 +1,1535 @@
+{
+  "version": "fnl-d07596c",
+  "clubs": [
+    {
+      "id": 0,
+      "name": "ФК Нижний Новгород",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 1,
+      "name": "Урал Екатеринбург",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 2,
+      "name": "Спартак Кострома",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 3,
+      "name": "ФК Сочи",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 4,
+      "name": "Велес Москва",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 5,
+      "name": "Торпедо Москва",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 6,
+      "name": "ФК Уфа",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 7,
+      "name": "Ротор Волгоград",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 8,
+      "name": "Шинник Ярославль",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 9,
+      "name": "Енисей Красноярск",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 10,
+      "name": "Арсенал Тула",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 11,
+      "name": "ФК Ленинградец",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 12,
+      "name": "ФК Челябинск",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 13,
+      "name": "Нефтехимик Нижнекамск",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 14,
+      "name": "Волга Ульяновск",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 15,
+      "name": "КАМАЗ Набережные Челны",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 16,
+      "name": "Текстильщик Иваново",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 17,
+      "name": "СКА Хабаровск",
+      "league": "FNL",
+      "group": ""
+    },
+    {
+      "id": 18,
+      "name": "Зенит",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 19,
+      "name": "Краснодар",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 20,
+      "name": "Локомотив Москва",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 21,
+      "name": "Спартак Москва",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 22,
+      "name": "ЦСКА Москва",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 23,
+      "name": "Динамо Москва",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 24,
+      "name": "Балтика",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 25,
+      "name": "Рубин",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 26,
+      "name": "Ахмат",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 27,
+      "name": "Ростов",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 28,
+      "name": "Крылья Советов",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 29,
+      "name": "Оренбург",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 30,
+      "name": "Акрон",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 31,
+      "name": "Динамо Махачкала",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 32,
+      "name": "Родина",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 33,
+      "name": "Факел",
+      "league": "RPL",
+      "group": ""
+    },
+    {
+      "id": 34,
+      "name": "Алания",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 35,
+      "name": "Волгарь",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 36,
+      "name": "Родина-2",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 37,
+      "name": "Машук-КМВ",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 38,
+      "name": "Сибирь",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 39,
+      "name": "Сокол Саратов",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 40,
+      "name": "Тюмень",
+      "league": "SECOND",
+      "group": "Серебро"
+    },
+    {
+      "id": 41,
+      "name": "Динамо Киров",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 42,
+      "name": "Зенит-2",
+      "league": "SECOND",
+      "group": "Серебро"
+    },
+    {
+      "id": 43,
+      "name": "Динамо Владивосток",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 44,
+      "name": "Иртыш",
+      "league": "SECOND",
+      "group": "Серебро"
+    },
+    {
+      "id": 45,
+      "name": "Амкар Пермь",
+      "league": "SECOND",
+      "group": "Серебро"
+    },
+    {
+      "id": 46,
+      "name": "Калуга",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 47,
+      "name": "Динамо Ставрополь",
+      "league": "SECOND",
+      "group": "Серебро"
+    },
+    {
+      "id": 48,
+      "name": "Торпедо Миасс",
+      "league": "SECOND",
+      "group": "Серебро"
+    },
+    {
+      "id": 49,
+      "name": "Динамо Брянск",
+      "league": "SECOND",
+      "group": "Золото"
+    },
+    {
+      "id": 50,
+      "name": "Arsenal",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 51,
+      "name": "Aston Villa",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 52,
+      "name": "AFC Bournemouth",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 53,
+      "name": "Brentford",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 54,
+      "name": "Brighton & Hove Albion",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 55,
+      "name": "Chelsea",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 56,
+      "name": "Coventry City",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 57,
+      "name": "Crystal Palace",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 58,
+      "name": "Everton",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 59,
+      "name": "Fulham",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 60,
+      "name": "Hull City",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 61,
+      "name": "Ipswich Town",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 62,
+      "name": "Leeds United",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 63,
+      "name": "Liverpool",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 64,
+      "name": "Manchester City",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 65,
+      "name": "Manchester United",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 66,
+      "name": "Newcastle United",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 67,
+      "name": "Nottingham Forest",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 68,
+      "name": "Sunderland",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 69,
+      "name": "Tottenham Hotspur",
+      "league": "EPL",
+      "group": ""
+    },
+    {
+      "id": 70,
+      "name": "Birmingham City",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 71,
+      "name": "Blackburn Rovers",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 72,
+      "name": "Bolton Wanderers",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 73,
+      "name": "Bristol City",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 74,
+      "name": "Burnley",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 75,
+      "name": "Cardiff City",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 76,
+      "name": "Charlton Athletic",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 77,
+      "name": "Derby County",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 78,
+      "name": "Lincoln City",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 79,
+      "name": "Middlesbrough",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 80,
+      "name": "Millwall",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 81,
+      "name": "Norwich City",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 82,
+      "name": "Portsmouth",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 83,
+      "name": "Preston North End",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 84,
+      "name": "Queens Park Rangers",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 85,
+      "name": "Sheffield United",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 86,
+      "name": "Southampton",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 87,
+      "name": "Stoke City",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 88,
+      "name": "Swansea City",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 89,
+      "name": "Watford",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 90,
+      "name": "West Bromwich Albion",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 91,
+      "name": "West Ham United",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 92,
+      "name": "Wolverhampton Wanderers",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 93,
+      "name": "Wrexham",
+      "league": "ENG2",
+      "group": ""
+    },
+    {
+      "id": 94,
+      "name": "Barnsley",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 95,
+      "name": "Blackpool",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 96,
+      "name": "Bradford City",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 97,
+      "name": "Bromley",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 98,
+      "name": "Burton Albion",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 99,
+      "name": "Cambridge United",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 100,
+      "name": "Doncaster Rovers",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 101,
+      "name": "Huddersfield Town",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 102,
+      "name": "Leicester City",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 103,
+      "name": "Leyton Orient",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 104,
+      "name": "Luton Town",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 105,
+      "name": "Mansfield Town",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 106,
+      "name": "Milton Keynes Dons",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 107,
+      "name": "Notts County",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 108,
+      "name": "Oxford United",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 109,
+      "name": "Peterborough United",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 110,
+      "name": "Plymouth Argyle",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 111,
+      "name": "Reading",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 112,
+      "name": "Sheffield Wednesday",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 113,
+      "name": "Stevenage",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 114,
+      "name": "Stockport County",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 115,
+      "name": "Wigan Athletic",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 116,
+      "name": "AFC Wimbledon",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 117,
+      "name": "Wycombe Wanderers",
+      "league": "ENG3",
+      "group": ""
+    },
+    {
+      "id": 118,
+      "name": "Accrington Stanley",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 119,
+      "name": "Barnet",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 120,
+      "name": "Bristol Rovers",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 121,
+      "name": "Cheltenham Town",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 122,
+      "name": "Chesterfield",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 123,
+      "name": "Colchester United",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 124,
+      "name": "Crawley Town",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 125,
+      "name": "Crewe Alexandra",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 126,
+      "name": "Exeter City",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 127,
+      "name": "Fleetwood Town",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 128,
+      "name": "Gillingham",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 129,
+      "name": "Grimsby Town",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 130,
+      "name": "Newport County",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 131,
+      "name": "Northampton Town",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 132,
+      "name": "Oldham Athletic",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 133,
+      "name": "Port Vale",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 134,
+      "name": "Rochdale",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 135,
+      "name": "Rotherham United",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 136,
+      "name": "Salford City",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 137,
+      "name": "Shrewsbury Town",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 138,
+      "name": "Swindon Town",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 139,
+      "name": "Tranmere Rovers",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 140,
+      "name": "Walsall",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 141,
+      "name": "York City",
+      "league": "ENG4",
+      "group": ""
+    },
+    {
+      "id": 142,
+      "name": "Barcelona",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 143,
+      "name": "Real Madrid",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 144,
+      "name": "Atletico Madrid",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 145,
+      "name": "Real Betis",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 146,
+      "name": "Real Sociedad",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 147,
+      "name": "Sevilla",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 148,
+      "name": "Athletic Club",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 149,
+      "name": "Villarreal",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 150,
+      "name": "Celta Vigo",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 151,
+      "name": "Getafe",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 152,
+      "name": "Espanyol",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 153,
+      "name": "Osasuna",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 154,
+      "name": "Alaves",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 155,
+      "name": "Rayo Vallecano",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 156,
+      "name": "Levante",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 157,
+      "name": "Elche",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 158,
+      "name": "Deportivo La Coruna",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 159,
+      "name": "Racing Santander",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 160,
+      "name": "Valencia",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 161,
+      "name": "Málaga",
+      "league": "LALIGA",
+      "group": ""
+    },
+    {
+      "id": 162,
+      "name": "Bayern Munich",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 163,
+      "name": "Borussia Dortmund",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 164,
+      "name": "Bayer Leverkusen",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 165,
+      "name": "RB Leipzig",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 166,
+      "name": "SC Freiburg",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 167,
+      "name": "Mainz 05",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 168,
+      "name": "SV Elversberg",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 169,
+      "name": "Werder Bremen",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 170,
+      "name": "Hamburger SV",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 171,
+      "name": "Augsburg",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 172,
+      "name": "Eintracht Frankfurt",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 173,
+      "name": "FC Koln",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 174,
+      "name": "VfB Stuttgart",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 175,
+      "name": "Hoffenheim",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 176,
+      "name": "Schalke 04",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 177,
+      "name": "Paderborn",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 178,
+      "name": "Union Berlin",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 179,
+      "name": "Borussia Monchengladbach",
+      "league": "BUND",
+      "group": ""
+    },
+    {
+      "id": 180,
+      "name": "Inter",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 181,
+      "name": "AC Milan",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 182,
+      "name": "Napoli",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 183,
+      "name": "Juventus",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 184,
+      "name": "Roma",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 185,
+      "name": "Lazio",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 186,
+      "name": "Atalanta",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 187,
+      "name": "Bologna",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 188,
+      "name": "Fiorentina",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 189,
+      "name": "Torino",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 190,
+      "name": "Udinese",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 191,
+      "name": "Genoa",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 192,
+      "name": "Cagliari",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 193,
+      "name": "Lecce",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 194,
+      "name": "Sassuolo",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 195,
+      "name": "Parma",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 196,
+      "name": "Frosinone",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 197,
+      "name": "Como",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 198,
+      "name": "Monza",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 199,
+      "name": "Venezia",
+      "league": "SERIEA",
+      "group": ""
+    },
+    {
+      "id": 200,
+      "name": "PSG",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 201,
+      "name": "Marseille",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 202,
+      "name": "Monaco",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 203,
+      "name": "Lyon",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 204,
+      "name": "Lille",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 205,
+      "name": "Nice",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 206,
+      "name": "Lens",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 207,
+      "name": "Rennes",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 208,
+      "name": "Strasbourg",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 209,
+      "name": "Le Mans",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 210,
+      "name": "Toulouse",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 211,
+      "name": "Brest",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 212,
+      "name": "Auxerre",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 213,
+      "name": "Angers",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 214,
+      "name": "Le Havre",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 215,
+      "name": "Troyes",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 216,
+      "name": "Paris FC",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 217,
+      "name": "Lorient",
+      "league": "L1",
+      "group": ""
+    },
+    {
+      "id": 218,
+      "name": "Benfica",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 219,
+      "name": "Porto",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 220,
+      "name": "Sporting CP",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 221,
+      "name": "Braga",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 222,
+      "name": "Vitoria Guimaraes",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 223,
+      "name": "Famalicao",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 224,
+      "name": "Rio Ave",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 225,
+      "name": "Gil Vicente",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 226,
+      "name": "Moreirense",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 227,
+      "name": "Estoril",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 228,
+      "name": "Santa Clara",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 229,
+      "name": "Arouca",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 230,
+      "name": "Casa Pia",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 231,
+      "name": "Estrela Amadora",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 232,
+      "name": "Nacional",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 233,
+      "name": "Académico de Viseu",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 234,
+      "name": "Alverca",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 235,
+      "name": "Marítimo",
+      "league": "POR",
+      "group": ""
+    },
+    {
+      "id": 236,
+      "name": "PSV",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 237,
+      "name": "Ajax",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 238,
+      "name": "Feyenoord",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 239,
+      "name": "AZ Alkmaar",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 240,
+      "name": "FC Twente",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 241,
+      "name": "FC Utrecht",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 242,
+      "name": "NEC Nijmegen",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 243,
+      "name": "Go Ahead Eagles",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 244,
+      "name": "Sparta Rotterdam",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 245,
+      "name": "FC Groningen",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 246,
+      "name": "SC Heerenveen",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 247,
+      "name": "Fortuna Sittard",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 248,
+      "name": "ADO Den Haag",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 249,
+      "name": "PEC Zwolle",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 250,
+      "name": "SC Cambuur",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 251,
+      "name": "Excelsior",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 252,
+      "name": "Willem II",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 253,
+      "name": "Telstar",
+      "league": "ERED",
+      "group": ""
+    },
+    {
+      "id": 254,
+      "name": "Динамо-2 Москва",
+      "league": "SECOND",
+      "group": "Серебро"
+    }
+  ]
+}
