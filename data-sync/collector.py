@@ -15,6 +15,7 @@ import tempfile
 import unicodedata
 import urllib.parse
 import urllib.request
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -182,6 +183,90 @@ def atomic_write(path, value):
             os.unlink(name)
 
 
+def validate_snapshot(snapshot, catalog, today):
+    """Validate a reviewed, dated batch; never infer a final score from a live score."""
+    if (snapshot.get('schemaVersion') != 2 or snapshot.get('catalogVersion') != catalog['version']
+        or snapshot.get('season') != '2026-27' or date(snapshot['asOf']) > today):
+        raise ValueError('Snapshot version, catalog or date')
+    leagues = snapshot['leagues']
+    if not isinstance(leagues, dict) or not 1 <= len(leagues) <= 13:
+        raise ValueError('Snapshot leagues')
+    for lg, league in leagues.items():
+        clubs = {c['id']: c for c in catalog['clubs'] if c['league'] == lg}
+        if (not clubs or league['id'] != lg or set(league['clubIds']) != set(clubs)
+            or len(league['clubIds']) != len(clubs) or date(league['checkedAt']) > today):
+            raise ValueError('Snapshot club set')
+        pairs = set()
+        for f in league['fixtures']:
+            h, a = f['home'], f['away']
+            if (type(h) is not int or type(a) is not int or h not in clubs or a not in clubs or h == a
+                or (h, a) in pairs or not '2026-07-01' <= date(f['date']) <= '2027-07-01'):
+                raise ValueError('Snapshot fixture')
+            if lg == 'SECOND' and clubs[h].get('group') != clubs[a].get('group'):
+                raise ValueError('Cross-group fixture')
+            pairs.add((h, a))
+            if f['score'] is not None and (f.get('status') != 'FT' or f['date'] > snapshot['asOf']
+                or len(f['score']) != 2 or any(type(n) is not int or not 0 <= n <= 30 for n in f['score'])):
+                raise ValueError('Unconfirmed final result')
+        computed = {t['club']: t for t in standings(league['fixtures'], clubs, snapshot['asOf'])}
+        rows = league['table']
+        if len(rows) != len(clubs) or {t['club'] for t in rows} != set(clubs):
+            raise ValueError('Incomplete snapshot table')
+        ranks = set()
+        for row in rows:
+            calculated = computed[row['club']]
+            for key in ['p', 'w', 'd', 'l', 'gf', 'ga']:
+                if type(row[key]) is not int or row[key] != calculated[key]:
+                    raise ValueError('Table does not reconcile with final results')
+            if row['pts'] != calculated['pts'] + row.get('adjustment', 0):
+                raise ValueError('Incorrect points adjustment')
+            rank = (row.get('group', ''), row['rank'])
+            if rank in ranks or type(row['rank']) is not int or row['rank'] < 1:
+                raise ValueError('Duplicate table rank')
+            ranks.add(rank)
+        actual_latest = max(f['date'] for f in league['fixtures'] if f['score'] is not None)
+        if league['dataAsOf'] != actual_latest:
+            raise ValueError('Source download date used as result date')
+    news = snapshot.get('news', [])
+    if not isinstance(news, list) or len(news) > 500:
+        raise ValueError('News size')
+    seen = set()
+    for n in news:
+        u = urllib.parse.urlparse(n['url'])
+        if (n['id'] in seen or date(n['date']) > today or not 1 <= len(n['title']) <= 220
+            or len(n['summary']) > 2000 or u.scheme != 'https' or u.username or u.password):
+            raise ValueError('News record')
+        seen.add(n['id'])
+    return snapshot
+
+
+def merge_snapshot(output, previous, snapshot, catalog, today):
+    """A stale upstream must not erase newer verified results, ranks or news."""
+    reviewed = None
+    try:
+        if snapshot is not None:
+            reviewed = validate_snapshot(snapshot, catalog, today)
+    except (ValueError, KeyError, TypeError):
+        output['snapshotStatus'] = 'error'
+    if reviewed is None and previous.get('schemaVersion') != 2:
+        return output
+    def freshness(league):
+        return (league.get('dataAsOf') or '', sum(f.get('score') is not None for f in league.get('fixtures', [])), league.get('checkedAt', ''))
+    for source in [previous if previous.get('schemaVersion') == 2 else {}, reviewed or {}]:
+        for lg, league in source.get('leagues', {}).items():
+            if lg not in output['leagues'] or freshness(league) >= freshness(output['leagues'][lg]):
+                output['leagues'][lg] = league
+    chosen = reviewed or previous
+    output.update(schemaVersion=2, asOf=chosen['asOf'], verifiedAt=chosen['verifiedAt'], timezone='Asia/Yekaterinburg',
+                  news=chosen.get('news', []))
+    output['unavailable'] = [x for x in output['unavailable'] if x['id'] not in output['leagues']]
+    output['summary'] = {'leagues': len(output['leagues']), 'clubs': sum(len(L.get('clubIds', [])) for L in output['leagues'].values()),
+                         'completedMatches': sum(sum(f.get('score') is not None for f in L.get('fixtures', [])) for L in output['leagues'].values()),
+                         'news': len(output['news'])}
+    output['revision'] = hashlib.sha256(json.dumps(output, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    return output
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', type=Path, default=ROOT)
@@ -193,8 +278,15 @@ def main():
     previous = json.loads(target.read_text()) if target.exists() else {}
     inbox_path = root/config['marketInbox']
     inbox = json.loads(inbox_path.read_text()) if inbox_path.exists() else None
-    today = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    today = dt.datetime.now(ZoneInfo('Asia/Yekaterinburg')).date().isoformat()
     output = collect(config, catalog, previous, today, inbox=inbox)
+    snapshot_path = root/'data-sync/inbox/snapshot.json'
+    try:
+        snapshot = json.loads(snapshot_path.read_text()) if snapshot_path.exists() else None
+    except (ValueError, OSError):
+        snapshot = None
+        output['snapshotStatus'] = 'error'
+    output = merge_snapshot(output, previous, snapshot, catalog, today)
     output['generatedAt'] = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')
     output['runner'] = 'github-actions' if os.environ.get('GITHUB_ACTIONS') == 'true' else 'local'
     atomic_write(target, output)
