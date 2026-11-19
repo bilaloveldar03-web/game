@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
-"""Free, bounded football-data collector. Python stdlib; GitHub sources only.
-
-No scraping, credentials, paid endpoints, or replacement of good data on failure.
-Dates describe the source's football results, never the time of download.
-"""
+"""Collect the game's free football feeds and keep the last validated data."""
 import argparse
 import datetime as dt
+from functools import partial
 import hashlib
 import json
 import os
@@ -16,6 +13,8 @@ import unicodedata
 import urllib.parse
 import urllib.request
 from zoneinfo import ZoneInfo
+
+from football_data import COMPETITIONS, FootballDataClient, load_league
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -103,17 +102,22 @@ def parse_league(raw, league, config, catalog, today):
             if not isinstance(score, list) or len(score) != 2 or any(type(n) is not int or not 0 <= n <= 30 for n in score) or d > today:
                 raise ValueError('Invalid final score')
         round_match = re.search(r'\d+', str(row.get('round', '')))
-        fixtures.append({'home': h, 'away': a, 'date': d, 'round': int(round_match[0]) if round_match else 0, 'score': score})
+        fixtures.append({'home': h, 'away': a, 'date': d, 'round': int(round_match[0]) if round_match else 0,
+                         'score': score, 'status': 'FT' if score is not None else 'scheduled',
+                         'source': league['url']})
     if used != {c['id'] for c in teams}:
         raise ValueError('Club set does not match game catalog')
     fixtures.sort(key=lambda f: (f['date'], f['home'], f['away']))
     latest = max((f['date'] for f in fixtures if f['score'] is not None), default=None)
     missing = sum(f['date'] < (dt.date.fromisoformat(today)-dt.timedelta(days=3)).isoformat() and f['score'] is None for f in fixtures)
     stale = not latest or (dt.date.fromisoformat(today)-dt.date.fromisoformat(latest)).days > 7 or missing > 0
+    table = standings(fixtures, used, today)
+    for rank, row in enumerate(table, 1):
+        row.update(rank=rank, adjustment=0, group='')
     return {'id': league['id'], 'season': config['season'], 'source': league['url'], 'license': 'CC0-1.0',
             'checkedAt': today, 'lastSuccess': today, 'dataAsOf': latest, 'status': 'stale' if stale else 'ok',
             'missingPastResults': missing, 'tableKind': 'calculated', 'clubIds': sorted(used), 'fixtures': fixtures,
-            'table': standings(fixtures, used, today)}
+            'table': table}
 
 
 def parse_market(raw, today):
@@ -144,13 +148,15 @@ def parse_market(raw, today):
             'lastSuccess': today, 'fresh': fresh, 'players': result, 'source': 'repository-inbox'}
 
 
-def collect(config, catalog, previous, today, loader=fetch, inbox=None):
+def collect(config, catalog, previous, today, loader=fetch, inbox=None, skip_leagues=()):
     output = {'schemaVersion': 1, 'catalogVersion': catalog['version'], 'season': config['season'],
               'checkedAt': today, 'leagues': {}, 'market': {}, 'unavailable': [
                   {'id': 'RPL', 'reason': 'Нет подключённого бесплатного источника текущего сезона'},
                   {'id': 'FNL', 'reason': 'Нет подключённого бесплатного источника текущего сезона'},
                   {'id': 'SECOND', 'reason': 'Нет подключённого бесплатного источника текущего сезона'}]}
     for league in config['leagues']:
+        if league['id'] in skip_leagues:
+            continue
         try:
             output['leagues'][league['id']] = parse_league(loader(league['url'], config['maxBytes']), league, config, catalog, today)
         except Exception as error:
@@ -240,6 +246,20 @@ def validate_snapshot(snapshot, catalog, today):
     return snapshot
 
 
+def retains_results(new, old):
+    """A provider response must account for every previously confirmed match."""
+    pairs = {(f['home'], f['away']) for f in new.get('fixtures', []) if f.get('score') is not None}
+    return all((f['home'], f['away']) in pairs for f in old.get('fixtures', []) if f.get('score') is not None)
+
+
+def summarize(output):
+    output['summary'] = {'leagues': len(output['leagues']), 'clubs': sum(len(L.get('clubIds', [])) for L in output['leagues'].values()),
+                         'completedMatches': sum(sum(f.get('score') is not None for f in L.get('fixtures', [])) for L in output['leagues'].values()),
+                         'news': len(output['news'])}
+    output['revision'] = hashlib.sha256(json.dumps(output, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    return output
+
+
 def merge_snapshot(output, previous, snapshot, catalog, today):
     """A stale upstream must not erase newer verified results, ranks or news."""
     reviewed = None
@@ -250,21 +270,75 @@ def merge_snapshot(output, previous, snapshot, catalog, today):
         output['snapshotStatus'] = 'error'
     if reviewed is None and previous.get('schemaVersion') != 2:
         return output
+
     def freshness(league):
         return (league.get('dataAsOf') or '', sum(f.get('score') is not None for f in league.get('fixtures', [])), league.get('checkedAt', ''))
+
+    calculated = output['leagues']
+    output['leagues'] = {}
     for source in [previous if previous.get('schemaVersion') == 2 else {}, reviewed or {}]:
         for lg, league in source.get('leagues', {}).items():
-            if lg not in output['leagues'] or freshness(league) >= freshness(output['leagues'][lg]):
+            current = output['leagues'].get(lg)
+            if not current or freshness(league) >= freshness(current) and retains_results(league, current):
                 output['leagues'][lg] = league
-    chosen = reviewed or previous
-    output.update(schemaVersion=2, asOf=chosen['asOf'], verifiedAt=chosen['verifiedAt'], timezone='Asia/Yekaterinburg',
-                  news=chosen.get('news', []))
+    for lg, league in calculated.items():
+        current = output['leagues'].get(lg, {})
+        if (league.get('status') in ('ok', 'stale') and league.get('dataAsOf')
+                and (not current or current.get('tableKind') == 'calculated'
+                     and freshness(league)[:2] > freshness(current)[:2])
+                and retains_results(league, current)):
+            output['leagues'][lg] = league
+    worlds = [source for source in (previous, reviewed) if source and source.get('schemaVersion') == 2]
+    chosen = max(worlds, key=lambda source: source['asOf'])
+    news_source = reviewed or previous
+    output.update(schemaVersion=2, asOf=chosen['asOf'], verifiedAt=chosen['verifiedAt'], timezone='Asia/Qyzylorda',
+                  news=news_source.get('news', []))
+    latest = max((L.get('dataAsOf') or '' for L in output['leagues'].values()), default='')
+    if latest > output['asOf']:
+        output['asOf'] = latest
     output['unavailable'] = [x for x in output['unavailable'] if x['id'] not in output['leagues']]
-    output['summary'] = {'leagues': len(output['leagues']), 'clubs': sum(len(L.get('clubIds', [])) for L in output['leagues'].values()),
-                         'completedMatches': sum(sum(f.get('score') is not None for f in L.get('fixtures', [])) for L in output['leagues'].values()),
-                         'news': len(output['news'])}
-    output['revision'] = hashlib.sha256(json.dumps(output, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
-    return output
+    return summarize(output)
+
+
+def refresh_football_data(output, config, catalog, today, client,
+                          league_loader=partial(load_league, calculate_standings=standings)):
+    """Apply each verified league independently, with explicit fallback status."""
+    details = {'status': 'missing-key' if client is None else 'pending', 'leagues': {}}
+    output['footballData'] = details
+    if client is None or output.get('schemaVersion') != 2:
+        return summarize(output) if output.get('schemaVersion') == 2 else output
+    details['attemptedAt'] = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')
+    success = 0
+    for league_id in COMPETITIONS:
+        if details['status'] == 'authorization-error':
+            details['leagues'][league_id] = 'authorization-error'
+            continue
+        try:
+            league = league_loader(client, league_id, config, catalog, today)
+            validate_snapshot({**output, 'asOf': today, 'leagues': {league_id: league}}, catalog, today)
+            current = output['leagues'].get(league_id, {})
+            if not retains_results(league, current) or (league['dataAsOf'] or '') < (current.get('dataAsOf') or ''):
+                details['leagues'][league_id] = 'older-data'
+                continue
+            output['leagues'][league_id] = league
+            details['leagues'][league_id] = 'ok'
+            success += 1
+            output['asOf'] = max(output['asOf'], league['checkedAt'])
+            if dt.datetime.fromisoformat(league['verifiedAt']) > dt.datetime.fromisoformat(output['verifiedAt']):
+                output['verifiedAt'] = league['verifiedAt']
+        except Exception as error:
+            if getattr(error, 'code', None) == 401:
+                details['status'] = 'authorization-error'
+                details['leagues'][league_id] = 'authorization-error'
+            elif getattr(error, 'code', None) == 403:
+                details['leagues'][league_id] = 'access-denied'
+            else:
+                details['leagues'][league_id] = 'error'
+            # Never print response bodies, request headers or the API key.
+            print(f'football-data.org {league_id}: {type(error).__name__} (kept prior data)')
+    if details['status'] != 'authorization-error':
+        details['status'] = 'ok' if success == len(COMPETITIONS) else 'partial' if success else 'error'
+    return summarize(output)
 
 
 def main():
@@ -278,8 +352,10 @@ def main():
     previous = json.loads(target.read_text()) if target.exists() else {}
     inbox_path = root/config['marketInbox']
     inbox = json.loads(inbox_path.read_text()) if inbox_path.exists() else None
-    today = dt.datetime.now(ZoneInfo('Asia/Yekaterinburg')).date().isoformat()
-    output = collect(config, catalog, previous, today, inbox=inbox)
+    today = dt.datetime.now(ZoneInfo('Asia/Qyzylorda')).date().isoformat()
+    token = os.environ.get('FOOTBALL_DATA_API_KEY', '').strip()
+    client = FootballDataClient(token, limit=config['maxBytes']) if token else None
+    output = collect(config, catalog, previous, today, inbox=inbox, skip_leagues=COMPETITIONS if client else ())
     snapshot_path = root/'data-sync/inbox/snapshot.json'
     try:
         snapshot = json.loads(snapshot_path.read_text()) if snapshot_path.exists() else None
@@ -287,12 +363,13 @@ def main():
         snapshot = None
         output['snapshotStatus'] = 'error'
     output = merge_snapshot(output, previous, snapshot, catalog, today)
+    output = refresh_football_data(output, config, catalog, today, client)
     output['generatedAt'] = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')
     output['runner'] = 'github-actions' if os.environ.get('GITHUB_ACTIONS') == 'true' else 'local'
     atomic_write(target, output)
     print(json.dumps({'checkedAt': today, 'leagues': {k: {'status': v['status'], 'dataAsOf': v.get('dataAsOf'),
                      'fixtures': len(v.get('fixtures', []))} for k, v in output['leagues'].items()},
-                     'market': output['market']['status']}, ensure_ascii=False))
+                     'market': output['market']['status'], 'footballData': output.get('footballData', {}).get('status')}, ensure_ascii=False))
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 name: Free football data sync
 on:
   schedule:
-    - cron: '37 5 * * *'
+    - cron: '37 */4 * * *'
   workflow_dispatch:
   push:
     paths:
@@ -21,7 +21,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test feed validation
+        run: python -m unittest discover -s data-sync -p 'test_*.py'
       - name: Validate and refresh public data
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python data-sync/collector.py
       - name: Publish changed data only
         shell: bash
