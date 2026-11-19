@@ -33,7 +33,7 @@ STATUS = {
     'IN_PLAY': 'in_progress', 'PAUSED': 'in_progress', 'POSTPONED': 'postponed',
     'SUSPENDED': 'suspended', 'CANCELLED': 'cancelled',
 }
-POSTSEASON = {'PLAYOFFS', 'PROMOTION', 'RELEGATION', 'SEMI_FINALS', 'FINAL'}
+REGULAR_SEASON = {None, 'REGULAR_SEASON'}
 
 # Exact aliases for display names that differ from both the game's club names
 # and the common English forms in config.json. Short names are also checked.
@@ -181,7 +181,7 @@ def _verify_competition(raw, code, year):
 
 
 def _kickoff(value, zone, start, end):
-    if not isinstance(value, str) or not value.endswith(('Z', '+00:00')):
+    if not isinstance(value, str) or not re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|\+00:00)', value):
         raise ValueError('Invalid UTC kickoff')
     timestamp = dt.datetime.fromisoformat(value.replace('Z', '+00:00'))
     day = timestamp.astimezone(zone).date().isoformat()
@@ -192,7 +192,7 @@ def _kickoff(value, zone, start, end):
 
 def _total_standings(payload):
     rows = [row['table'] for row in payload['standings']
-            if row.get('type') == 'TOTAL' and not row.get('group') and row.get('stage') not in POSTSEASON]
+            if row.get('type') == 'TOTAL' and not row.get('group') and row.get('stage') in REGULAR_SEASON]
     if len(rows) != 1 or not isinstance(rows[0], list):
         raise ValueError('Expected one regular season standings table')
     return rows[0]
@@ -206,7 +206,7 @@ def _fixtures(payload, teams, names, league, year, today):
     zone = ZoneInfo(TIME_ZONES[league])
     start, end = f'{year}-07-01', f'{int(year) + 1}-07-01'
     for row in rows:
-        if row.get('stage') in POSTSEASON:
+        if row.get('stage') not in REGULAR_SEASON:
             continue
         home_team, away_team = row['homeTeam'], row['awayTeam']
         home, away = teams.get(_team_id(home_team)), teams.get(_team_id(away_team))

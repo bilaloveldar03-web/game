@@ -70,6 +70,10 @@ class FootballDataTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'competition mismatch'):
             self.data()
 
+    def test_playoff_fixture_does_not_duplicate_regular_season(self):
+        self.matches.append({**self.matches[0], 'id': 321, 'stage': 'PLAYOFF_ROUND_1'})
+        self.assertEqual(len(self.data()['fixtures']), 2)
+
     def test_future_finished_score_rejected(self):
         self.matches[1]['status'] = 'FINISHED'
         with self.assertRaisesRegex(ValueError, 'final score'):
