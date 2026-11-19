@@ -256,7 +256,8 @@ def summarize(output):
     output['summary'] = {'leagues': len(output['leagues']), 'clubs': sum(len(L.get('clubIds', [])) for L in output['leagues'].values()),
                          'completedMatches': sum(sum(f.get('score') is not None for f in L.get('fixtures', [])) for L in output['leagues'].values()),
                          'news': len(output['news'])}
-    output['revision'] = hashlib.sha256(json.dumps(output, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    payload = {key: value for key, value in output.items() if key != 'revision'}
+    output['revision'] = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     return output
 
 
@@ -316,6 +317,8 @@ def refresh_football_data(output, config, catalog, today, client,
         try:
             league = league_loader(client, league_id, config, catalog, today)
             validate_snapshot({**output, 'asOf': today, 'leagues': {league_id: league}}, catalog, today)
+            verified_at = dt.datetime.fromisoformat(league['verifiedAt'])
+            newest_check = verified_at > dt.datetime.fromisoformat(output['verifiedAt'])
             current = output['leagues'].get(league_id, {})
             if not retains_results(league, current) or (league['dataAsOf'] or '') < (current.get('dataAsOf') or ''):
                 details['leagues'][league_id] = 'older-data'
@@ -324,7 +327,7 @@ def refresh_football_data(output, config, catalog, today, client,
             details['leagues'][league_id] = 'ok'
             success += 1
             output['asOf'] = max(output['asOf'], league['checkedAt'])
-            if dt.datetime.fromisoformat(league['verifiedAt']) > dt.datetime.fromisoformat(output['verifiedAt']):
+            if newest_check:
                 output['verifiedAt'] = league['verifiedAt']
         except Exception as error:
             if getattr(error, 'code', None) == 401:
